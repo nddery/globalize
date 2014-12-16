@@ -1,9 +1,9 @@
 angular.module('gz.directives').directive('map', function($filter, $window, dataFactory) {
-  // www.tnoda.com/blog/2013-12-07
   return {
     restrict: 'E'
     ,scope: {
-      industryid: '=' // bi-directional data-binding
+      industry: '=', // bi-directional data-binding
+      account: '=' // bi-directional data-binding
     }
     ,link: function(scope, element, attrs) {
       var  aWindow       = angular.element($window)
@@ -54,9 +54,15 @@ angular.module('gz.directives').directive('map', function($filter, $window, data
       });
 
       // Monitor the bound data.
-      scope.$watch('industryid', function(data) {
-        scope.industryid = data;
-        return scope.colorMap(data);
+      scope.$watch('industry', function(data) {
+        scope.industry = data;
+        return scope.colorMap();
+      });
+
+      // Monitor the bound data.
+      scope.$watch('account', function(data) {
+        scope.account = data;
+        return scope.colorMap();
       });
 
       // On window resize, re-render d3 canvas.
@@ -65,22 +71,32 @@ angular.module('gz.directives').directive('map', function($filter, $window, data
       scope.$watch(function(){
         return aWindow[0].innerWidth;
       }, function(){
-        return scope.colorMap(scope.industryid);
+        return scope.colorMap();
       });
 
-      scope.colorMap = function(data) {
-        dataFactory.getIndustryDataByID(scope.industryid).then(function(data){
+      scope.colorMap = function() {
+        dataFactory.getIndustryDataByID(scope.industry.id).then(function(data){
           svg.selectAll('path.country')
              .attr('class', function(d,i) {
-               var c = 'country';
-               if (typeof data.total_fans[d.id] !== 'undefined') {
-                 c += ' t-' + data.total_fans[d.id];
-               }
-               else {
-                 c += ' t-0';
-               }
+                var value  = 'country',
+                    source = data.total_fans;
 
-               return c;
+                if ((typeof scope.account !== 'undefined'
+                     && typeof scope.account.id !== 'undefined')
+                       && scope.account.id !== 0) {
+                  source = scope.account.fans_country;
+                  console.log('allo');
+                  console.log(scope.account);
+                }
+
+                if (typeof source[d.id] !== 'undefined') {
+                  value += ' t-' + source[d.id];
+                }
+                else {
+                  value += ' t-0';
+                }
+
+                return value;
              });
         });
       };

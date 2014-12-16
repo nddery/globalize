@@ -20,11 +20,15 @@ a {
   }
 }
 
-#industries {
+#industries, #accounts {
   position: fixed;
   top: 20px;
   right: 43%;
   width: 14%;
+}
+
+#accounts {
+  top: 40px;
 }
 
 #about {

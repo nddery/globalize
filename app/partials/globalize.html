@@ -5,5 +5,9 @@
         ng-model="industry"
         ng-options="industry as industry.name for industry in industries"></select>
 
-  <map industryid="industryID"></map>
+<select id="accounts"
+        ng-model="account"
+        ng-options="account as account.name for account in accounts"></select>
+
+  <map industry="industry" account="account"></map>
 </div>
