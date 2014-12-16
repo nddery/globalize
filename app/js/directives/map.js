@@ -38,6 +38,21 @@ angular.module('gz.directives').directive('map', function($filter, $window, data
                        .attr('width', width)
                        .attr('height', width * ratio);
 
+      // Draw country map.
+      dataFactory.getCountryTopoJSON().then(function(countries){
+        svg.append('g')
+           .attr('class', 'countries')
+           .selectAll('path')
+           .data(topojson.feature(countries, countries.objects.countries).features)
+           .enter()
+           .append('path')
+           .attr('id', function(d,i) {
+             return d.id;
+           })
+           .attr('class', 'country')
+           .attr('d', path);
+      });
+
       // Monitor the bound data.
       scope.$watch('industryid', function(data) {
         scope.industryid = data;
@@ -54,24 +69,19 @@ angular.module('gz.directives').directive('map', function($filter, $window, data
       });
 
       scope.colorMap = function(data) {
-        dataFactory.getCountryTopoJSON().then(function(countries){
-          dataFactory.getIndustryDataByID(scope.industryid).then(function(data){
-            svg.append('g')
-               .attr('class', 'countries')
-               .selectAll('path')
-               .data(topojson.feature(countries, countries.objects.countries).features)
-               .enter()
-               .append('path')
-               .attr('class', function(d,i) {
-                 if (typeof data.total_fans[d.id] !== 'undefined') {
-                   return 't-' + data.total_fans[d.id];
-                 }
-                 else {
-                   return 't-0';
-                 }
-               })
-               .attr('d', path);
-          });
+        dataFactory.getIndustryDataByID(scope.industryid).then(function(data){
+          svg.selectAll('path.country')
+             .attr('class', function(d,i) {
+               var c = 'country';
+               if (typeof data.total_fans[d.id] !== 'undefined') {
+                 c += ' t-' + data.total_fans[d.id];
+               }
+               else {
+                 c += ' t-0';
+               }
+
+               return c;
+             });
         });
       };
     }

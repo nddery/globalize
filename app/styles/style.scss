@@ -75,9 +75,14 @@ a {
   stroke: lighten(#34343a, 75);
   fill: #fff;
 
-  @for $i from 1 through 100 {
-    .t-#{$i} {
-      fill: rgba(#ff6634, $i / 100);
+  .country {
+    transition: all 0.3s ease-out;
+
+    @for $i from 1 through 100 {
+      &.t-#{$i} {
+        fill: rgba(#ff6634, $i / 100);
+      }
     }
   }
+
 }
