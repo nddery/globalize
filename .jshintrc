@@ -1,0 +1,17 @@
+{
+  "browser": true,
+  "curly": true,
+  "devel": true,
+  "indent": 2,
+  "maxlen": 100,
+  "quotmark": "single",
+  "trailing": true,
+  "laxcomma": true,
+  "undef": true,
+  "globals": {
+    "_": false,
+    "angular": false,
+    "d3": false,
+    "topojson": false
+  }
+}

@@ -1,0 +1,82 @@
+@import "../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/normalize";
+
+body {
+  overflow: hidden;
+}
+
+a {
+  color: #ff6634;
+  transition: color 0.3s ease-out;
+
+  &:hover {
+    color: darken(#ff6634, 15%);
+    text-decoration: none;
+  }
+}
+
+.inline {
+  li {
+    display: inline-block;
+  }
+}
+
+#industries {
+  position: fixed;
+  top: 20px;
+  right: 43%;
+  width: 14%;
+}
+
+#about {
+  position: fixed;
+  bottom: 10px;
+  left: 10px;
+  width: 30%;
+
+  h1, h2, p {
+    float: left;
+    clear: both;
+    background: #fff;
+  }
+
+  h1 {
+    margin: 0;
+    font-size: 22px;
+  }
+
+  h2 {
+    margin: 0 0 2px;
+    font-size: 16px;
+  }
+
+  p {
+    margin-bottom: 0;
+  }
+}
+
+#colophon {
+  color: #3c3c3a;
+  text-align: right;
+  padding: 10px;
+  position: fixed;
+  right: 0;
+  bottom: 0;
+
+  p {
+    margin: 0;
+    float: right;
+    clear: both;
+    background: #fff;
+  }
+}
+
+.countries {
+  stroke: lighten(#34343a, 75);
+  fill: #fff;
+
+  @for $i from 1 through 100 {
+    .t-#{$i} {
+      fill: rgba(#ff6634, $i / 100);
+    }
+  }
+}
