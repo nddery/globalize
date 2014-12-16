@@ -1,5 +1,10 @@
 @import "../bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/normalize";
 
+// http://hugogiraudel.com/2013/08/12/sass-functions/#section-2
+@function clamp($value, $min, $max) {
+  @return if($value > $max, $max, if($value < $min, $min, $value));
+}
+
 body {
   overflow: hidden;
 }
@@ -84,7 +89,7 @@ a {
 
     @for $i from 1 through 100 {
       &.t-#{$i} {
-        fill: rgba(#ff6634, $i / 100);
+        fill: rgba(#ff6634, clamp($i / 100, 0.1, 1));
       }
     }
   }
