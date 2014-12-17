@@ -85,8 +85,6 @@ angular.module('gz.directives').directive('map', function($filter, $window, data
                      && typeof scope.account.id !== 'undefined')
                        && scope.account.id !== 0) {
                   source = scope.account.fans_country;
-                  console.log('allo');
-                  console.log(scope.account);
                 }
 
                 if (typeof source[d.id] !== 'undefined') {

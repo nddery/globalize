@@ -11,16 +11,18 @@ angular.module('gz', [
   'gz.controllers'
 ])
 
-.config(function($routeProvider) {
+.config(function($routeProvider, $locationProvider) {
   $routeProvider
     .when('/industry/:industryid/:accountname', {
       templateUrl: 'partials/globalize.html',
       controller: 'GlobalizeCtrl'
     })
     .otherwise('/industry/1/all-brands');
+
+  $locationProvider.hashPrefix('!');
 });
 
-// http://stackoverflow.com/a/5782563
+// http://stackoverflow.com/a/1054862
 String.prototype.slugify = function() {
   return this.toLowerCase()
              .replace(/[^\w ]+/g,'')
