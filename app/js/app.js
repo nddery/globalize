@@ -13,9 +13,20 @@ angular.module('gz', [
 
 .config(function($routeProvider) {
   $routeProvider
-    .when('/', {
+    .when('/industry/:industryid', {
       templateUrl: 'partials/globalize.html',
       controller: 'GlobalizeCtrl'
     })
-    .otherwise('/');
+    .when('/industry/:industryid/:accountname', {
+      templateUrl: 'partials/globalize.html',
+      controller: 'GlobalizeCtrl'
+    })
+    .otherwise('/industry/1/all-brands');
 });
+
+// http://stackoverflow.com/a/5782563
+String.prototype.slugify = function() {
+  return this.toLowerCase()
+             .replace(/[^\w ]+/g,'')
+             .replace(/ +/g,'-');
+};

@@ -1,7 +1,12 @@
 angular.module('gz.controllers')
-.controller('GlobalizeCtrl', function($scope, config, dataFactory) {
-  $scope.industry = config.industries[0];
+.controller('GlobalizeCtrl', function($scope, $routeParams, config, dataFactory) {
   $scope.industries = config.industries;
+  // Set industry according to industryid in route
+  angular.forEach($scope.industries, function(industry) {
+    if (industry.id === $routeParams.industryid) {
+      $scope.industry = industry;
+    }
+  });
 
   function setActiveAccount() {
     angular.forEach($scope.accounts, function(value, key) {
@@ -16,7 +21,14 @@ angular.module('gz.controllers')
     dataFactory.getIndustryDataByID($scope.industry.id).then(function(data){
       $scope.accounts = data.accounts;
       $scope.accounts.unshift({name: 'All brands', id: 0});
-      $scope.account = $scope.accounts[0];
+
+      // Set according to URL
+      angular.forEach($scope.accounts, function(account) {
+        if (account.name.slugify() === $routeParams.accountname) {
+          $scope.account = account;
+        }
+      });
+
       setActiveAccount();
     });
   });
