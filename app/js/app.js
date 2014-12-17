@@ -13,10 +13,6 @@ angular.module('gz', [
 
 .config(function($routeProvider) {
   $routeProvider
-    .when('/industry/:industryid', {
-      templateUrl: 'partials/globalize.html',
-      controller: 'GlobalizeCtrl'
-    })
     .when('/industry/:industryid/:accountname', {
       templateUrl: 'partials/globalize.html',
       controller: 'GlobalizeCtrl'

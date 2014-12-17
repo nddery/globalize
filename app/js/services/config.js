@@ -4,7 +4,7 @@ angular.module('gz.services')
        {name: 'Airlines', id: '1'}
       ,{name: 'Apps & Software', id: '2'}
       ,{name: 'Automotive', id: '3'}
-      ,{name: 'Banking & Finance', id: '1'}
+      ,{name: 'Banking & Finance', id: '5'}
       ,{name: 'Beverages - Softdrinks', id: '7'}
       ,{name: 'Beverages - Wine/Spirits', id: '8'}
       ,{name: 'Clothing & Accessories', id: '9'}
