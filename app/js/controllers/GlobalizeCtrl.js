@@ -15,7 +15,7 @@ angular.module('gz.controllers')
       var url = '/industry/' + $scope.industry.id + '/' + $scope.account.name.slugify();
 
       if ($location.path() !== url) {
-        $location.path(url);
+        $location.path(url, false);
       }
     }
   }

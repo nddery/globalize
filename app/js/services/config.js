@@ -22,7 +22,7 @@ angular.module('gz.services')
       ,{name: 'Telecoms / Internet', id: '46'}
       ,{name: 'Websites', id: '49'}
       ,{name: 'Automotive', id: '50'}
-      ,{name: 'Retail Chains', id: '51'}
+      // ,{name: 'Retail Chains', id: '51'}
       ,{name: 'Candy', id: '56'}
     ]
   });
